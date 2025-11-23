@@ -13,6 +13,7 @@ import me.SuperRonanCraft.BetterRTP.references.depends.DepEconomy;
 import me.SuperRonanCraft.BetterRTP.references.depends.DepPlaceholderAPI;
 import me.SuperRonanCraft.BetterRTP.references.file.Files;
 import me.SuperRonanCraft.BetterRTP.references.invs.RTPInventories;
+import me.SuperRonanCraft.BetterRTP.references.messages.MessageUtil;
 import me.SuperRonanCraft.BetterRTP.references.messages.Message_RTP;
 import me.SuperRonanCraft.BetterRTP.references.messages.MessagesCore;
 import me.SuperRonanCraft.BetterRTP.references.player.playerdata.PlayerDataManager;
@@ -57,6 +58,7 @@ public class BetterRTP extends JavaPlugin {
         new Metrics(this);
         listener.registerEvents(this);
         queue.registerEvents(this);
+        MessageUtil.init(this);
         try {
             new DepPlaceholderAPI().register();
         } catch (NoClassDefFoundError e) {
@@ -69,6 +71,7 @@ public class BetterRTP extends JavaPlugin {
         invs.closeAll();
         queue.unload();
         rtpLogger.unload();
+        MessageUtil.close();
     }
 
     private void registerDependencies() {
@@ -117,5 +120,10 @@ public class BetterRTP extends JavaPlugin {
 
     public static void debug(String str) {
         getInstance().getLogger().info(str);
+    }
+
+    // ADD THIS METHOD - This is what's missing!
+    public static BetterRTP getInstance() {
+        return instance;
     }
 }

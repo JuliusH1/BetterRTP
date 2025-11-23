@@ -44,26 +44,62 @@ public enum MessagesCore {
 
     private static final String pre = "Messages.";
 
+    /**
+     * Send message without placeholders - NOW WITH MINIMESSAGE SUPPORT
+     */
     public void send(CommandSender sendi) {
-        Message_RTP.sms(sendi, Message_RTP.getLang().getString(pre + section));
+        String message = Message_RTP.getLang().getString(pre + section);
+        if (message != null && !message.isEmpty()) {
+            // Use MessageUtil for MiniMessage support
+            MessageUtil.send(sendi, message);
+        }
     }
 
+    /**
+     * Send message with single placeholder object - NOW WITH MINIMESSAGE SUPPORT
+     */
     public void send(CommandSender sendi, Object placeholderInfo) {
-        Message_RTP.sms(sendi, Message_RTP.getLang().getString(pre + section), placeholderInfo);
+        String message = Message_RTP.getLang().getString(pre + section);
+        if (message != null && !message.isEmpty()) {
+            // Apply placeholders first
+            message = Message.placeholder(sendi, message, placeholderInfo);
+            // Then send with MiniMessage support
+            MessageUtil.send(sendi, message);
+        }
     }
 
+    /**
+     * Send message with list of placeholder objects - NOW WITH MINIMESSAGE SUPPORT
+     */
     public void send(CommandSender sendi, List<Object> placeholderInfo) {
-        Message_RTP.sms(sendi, Message_RTP.getLang().getString(pre + section), placeholderInfo);
+        String message = Message_RTP.getLang().getString(pre + section);
+        if (message != null && !message.isEmpty()) {
+            // Apply placeholders first
+            message = Message.placeholder(sendi, message, placeholderInfo);
+            // Then send with MiniMessage support
+            MessageUtil.send(sendi, message);
+        }
     }
 
+    /**
+     * Get message with placeholder - returns raw string
+     */
     public String get(CommandSender p, Object placeholderInfo) {
         return Message.placeholder(p, Message_RTP.getLang().getString(pre + section), placeholderInfo);
     }
 
+    /**
+     * Send message with HashMap of placeholder values - NOW WITH MINIMESSAGE SUPPORT
+     */
     public void send(CommandSender sendi, HashMap<String, String> placeholder_values) {
         String msg = Message_RTP.getLang().getString(pre + section);
-        for (String ph : placeholder_values.values())
-            msg = msg.replace(ph, placeholder_values.get(ph));
-        Message_RTP.sms(sendi, msg);
+        if (msg != null && !msg.isEmpty()) {
+            // Replace all placeholders
+            for (String ph : placeholder_values.keySet()) {
+                msg = msg.replace(ph, placeholder_values.get(ph));
+            }
+            // Send with MiniMessage support
+            MessageUtil.send(sendi, msg);
+        }
     }
 }
