@@ -17,6 +17,12 @@ import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_TeleportPostEven
 import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_TeleportPreEvent;
 import me.SuperRonanCraft.BetterRTP.references.messages.MessagesCore;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.WorldPlayer;
+import me.SuperRonanCraft.BetterRTP.player.rtp.RTP;  // For RTP class
+import me.SuperRonanCraft.BetterRTP.references.file.Files;  // For getFiles()
+import me.SuperRonanCraft.BetterRTP.references.database.DatabaseHandler;  // For getDatabaseHandler()
+import me.SuperRonanCraft.BetterRTP.references.WarningHandler;  // For getWarningHandler()
+import me.SuperRonanCraft.BetterRTP.references.RTPLogger;  // For getRtpLogger()
+import me.SuperRonanCraft.BetterRTP.references.rtpinfo.CooldownHandler;
 
 //---
 //Credit to @PaperMC for PaperLib - https://github.com/PaperMC/PaperLib

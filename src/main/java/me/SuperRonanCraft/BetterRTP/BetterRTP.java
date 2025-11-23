@@ -48,6 +48,7 @@ public class BetterRTP extends JavaPlugin {
     @Getter private boolean PlaceholderAPI;
     @Getter private final RTPLogger rtpLogger = new RTPLogger();
     @Getter private final FoliaHandler foliaHandler = new FoliaHandler();
+    private RTP rtp;
 
     @Override
     public void onEnable() {
@@ -59,6 +60,8 @@ public class BetterRTP extends JavaPlugin {
         listener.registerEvents(this);
         queue.registerEvents(this);
         MessageUtil.init(this);
+        instance = this;
+        rtp = new RTP();
         try {
             new DepPlaceholderAPI().register();
         } catch (NoClassDefFoundError e) {
@@ -125,5 +128,37 @@ public class BetterRTP extends JavaPlugin {
     // ADD THIS METHOD - This is what's missing!
     public static BetterRTP getInstance() {
         return instance;
+    }
+
+    public PlayerInfo getPInfo() {
+        return pInfo;
+    }
+
+    public RTP getRTP() {
+        return rtp;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public Files getFiles() {
+        return files;
+    }
+
+    public DatabaseHandler getDatabaseHandler() {
+        return databaseHandler;
+    }
+
+    public WarningHandler getWarningHandler() {
+        return warningHandler;
+    }
+
+    public RTPLogger getRtpLogger() {
+        return rtpLogger;
+    }
+
+    public CooldownHandler getCooldowns() {
+        return cooldowns;
     }
 }
